@@ -9,11 +9,8 @@ def data(start_val):
 
     while True:
         current_val = psutil.net_io_counters().bytes_sent + psutil.net_io_counters().bytes_recv
-        print (current_val)
         result = current_val - start_val + result
-        print ('result is:', result)
         start_val = current_val
-        print ('start_val is:', start_val)
         time.sleep(1)
         if is_connected():
             print (str(convert_to_mo(result)))
