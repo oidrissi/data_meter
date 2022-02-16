@@ -10,13 +10,10 @@ def data(start_val):
     #returns the data consumed while connected
     result = 0
 
-    if is_connected():
-        while True:
-            current_val = psutil.net_io_counters().bytes_sent + psutil.net_io_counters().bytes_recv
-            result = current_val - start_val + result
-            return (str(convert_to_mo(result)))
-    else:
-        return ("No data to show")
+    while True:
+        current_val = psutil.net_io_counters().bytes_sent + psutil.net_io_counters().bytes_recv
+        result = current_val - start_val + result
+        return (str(convert_to_mo(result)))
 
 def main():
     kiss = data(start_val)
