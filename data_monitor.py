@@ -3,8 +3,14 @@ import threading
 from tkinter import *
 import psutil
 import socket
+from requests import get
 
 start_val = 0
+
+def set_data_to_consume():
+    print("How Much Data Do you Have left?")
+    requested_data = input()
+    return (requested_data)
 
 def data(start_val):
     #returns the data consumed while connected
@@ -15,9 +21,16 @@ def data(start_val):
         result = current_val - start_val + result
         return (str(convert_to_mo(result)))
 
+def get_ext_ip():
+    ip = get('https://api.ipify.org').content.decode('utf8')
+    return ('My public IP address is: {}'.format(ip))
+
+ip = get_ext_ip()
+max_data = set_data_to_consume()
+data_left = +
 def main():
     kiss = data(start_val)
-    display_label['text'] = str(kiss) + ' || Mo Consumed '
+    display_label['text'] = kiss + ' || Mo Consumed ' + '\n' + (str(ip))
     display_label.pack()
     app.after(5, main)
         
@@ -36,12 +49,11 @@ def convert_to_mo(value):
 
 app = Tk()
 app.title("Data Consumption Monitor")
-app.geometry('420x300')
+app.geometry('420x69')
 app.configure(background = 'black')
 frame = Frame(app)
-display_label = Label(frame, font = 'Terminal 20', bg = 'black', fg = '#20C20E')
-sec_label = Label(frame, font = 'Terminal 20', bg = 'black', fg = '#20C20E')
-frame.pack(side = RIGHT)
+display_label = Label(frame, font = 'Terminal 15', bg = 'black', fg = '#20C20E')
+frame.pack(anchor = CENTER)
 main()
 app.attributes('-topmost',True)
 app.mainloop()
