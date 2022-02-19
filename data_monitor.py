@@ -28,21 +28,21 @@ def get_ext_ip():
 # days_until_renewal = input()
 
 # def prediction_end():
-    
-
-ip = get_ext_ip()
-max_data = float(set_data_to_consume()) * 1000
-
-def main():
-    kiss = data(start_val)
-    left = max_data - kiss
-    display_label['text'] = str(kiss) + ' || Mo Consumed ' + '\n' + (str(ip)) + '\n' + (str(left)) + ' || Mo Left '
-    display_label.pack()
-    app.after(5, main)
 
 def convert_to_mo(value):
     #1 octet = 1 byte = 8 bits // 1024 bytes = 8192 bits = 1 kb;
     return value/1000000
+
+ip = get_ext_ip()
+max_data = float(set_data_to_consume()) * 1000 + data(start_val)
+
+def main():
+    kiss = data(start_val)
+    # max_data = max_data + kiss
+    left = max_data - kiss
+    display_label['text'] = str(kiss) + ' || Mo Consumed ' + '\n' + (str(ip)) + '\n' + (str(left)) + ' || Mo Left '
+    display_label.pack()
+    app.after(5, main)
 
 app = Tk()
 app.title("Data Consumption Monitor")
